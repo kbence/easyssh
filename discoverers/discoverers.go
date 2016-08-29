@@ -38,6 +38,7 @@ func makeFromSExp(data []interface{}) interfaces.Discoverer {
 const (
 	nameCommaSeparated = "comma-separated"
 	nameKnife          = "knife"
+	nameAwsEc2Tag      = "aws-ec2-tag"
 	nameFirstMatching  = "first-matching"
 	nameFixed          = "fixed"
 )
@@ -47,6 +48,9 @@ var discovererMakerMap = map[string]func() interfaces.Discoverer{
 	nameKnife: func() interfaces.Discoverer {
 		return &knifeSearch{
 			realKnifeSearchResultRowExtractor{}, util.RealCommandRunner{}}
+	},
+	nameAwsEc2Tag: func() interfaces.Discoverer {
+		return &awsEc2TagSearch{}
 	},
 	nameFirstMatching: func() interfaces.Discoverer { return &firstMatching{} },
 	nameFixed:         func() interfaces.Discoverer { return &fixed{} },
